@@ -23,7 +23,14 @@ app.get ('/api/todos', function(req, res){
     if(err){
       throw err;
     }
-    res.json(todos);
+    res.json(todos.map(function (todo) {
+      return {
+        id: todo._id,
+        title: todo.title,
+        order: todo.order,
+        completed: todo.completed
+      }
+    }));
   });
 });
 
@@ -46,7 +53,14 @@ app.get('/api/todos/:id', function(req, res){
     if(err){
       throw err;
     }
-    res.json(todo);
+    res.json(todos.map(function (todo) {
+      return {
+        id: todo._id,
+        title: todo.title,
+        order: todo.order,
+        completed: todo.completed
+      }
+    }));
   });
 });
 
@@ -59,14 +73,21 @@ app.put('/api/todos/:id', function(req, res){
     if(err){
       throw err;
     }
-    res.json(todo);
+    res.json(todos.map(function (todo) {
+      return {
+        id: todo._id,
+        title: todo.title,
+        order: todo.order,
+        completed: todo.completed
+      }
+    }));
   });
 });
 
 
 //Deletes a Todo by ID
-app.delete('/api/todos/:_id', function(req, res){
-  var id = req.params._id
+app.delete('/api/todos/:id', function(req, res){
+  var id = req.params.id
   console.log("Your ID is " + id);
   Todo.removeTodo(id, function(err, todo){
     if(err){

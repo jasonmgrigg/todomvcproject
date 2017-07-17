@@ -26,9 +26,9 @@ module.exports.addTodo = function(todo, callback){
 }
 
 //Deletes Todo by Id
-module.exports.removeTodo = function(id){
-  // var query = {_id: id};
-  Todo.findByIdAndRemove(id);
+module.exports.removeTodo = function(id, callback){
+  var query = {_id: id};
+  Todo.remove(query, callback);
 }
 
 //Get Todo by Id
